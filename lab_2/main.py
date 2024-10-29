@@ -1,5 +1,7 @@
 import argparse
 
+from img_downloader import img_downloader
+
 def get_arguments() -> tuple:
     """
     Функция для получения аргуметов
@@ -18,7 +20,11 @@ def get_arguments() -> tuple:
     
     return parser.parse_args().keyword, parser.parse_args().sp, \
             parser.parse_args().ap
-    
+
+ 
 if __name__ == "__main__":
-    keyword, sp, ap = get_arguments()
-    
+    keyword, save_path, annotation_path = get_arguments()
+    try:
+        img_downloader(keyword=keyword, save_path=save_path)
+    except:
+        raise Exception("Something went wrong")
