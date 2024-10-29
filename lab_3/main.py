@@ -1,6 +1,7 @@
 import argparse
 
 from img_actions import image_reader, get_image_shape
+from histogram_actions import draw_histogram
 
 def get_arguments() -> tuple:
     """
@@ -28,6 +29,7 @@ if __name__ == '__main__':
     width, height = get_image_shape(img)
     print("Image size: {}x{}".format(width, height))
 
-    
+    draw_histogram(img)
+
 
     
