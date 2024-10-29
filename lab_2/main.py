@@ -2,6 +2,7 @@ import argparse
 
 from img_downloader import img_downloader
 from annotation_maker import annotation_maker
+from iterator import ImgIterator
 
 def get_arguments() -> tuple:
     """
@@ -28,5 +29,10 @@ if __name__ == "__main__":
     try:
         img_downloader(keyword=keyword, save_path=save_path)
         annotation_maker(save_path=save_path, annotation_path=annotation_path)
+
+        iterator = ImgIterator(annotation_path=annotation_path)
+        for img in iterator:
+            print(img)
+            
     except:
         raise Exception("Something went wrong")

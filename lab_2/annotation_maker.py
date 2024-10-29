@@ -14,8 +14,8 @@ def annotation_maker(save_path: str, annotation_path: str) -> None:
     paths = []
 
     for name in os.listdir(save_path):
-        relative_path = os.path.join(save_path, name)
-        absolute_path =os.path.abspath(relative_path)
+        relative_path = os.path.relpath(name, start=save_path)
+        absolute_path = os.path.abspath(relative_path)
         paths.append([absolute_path,relative_path])
 
     try:
