@@ -2,6 +2,10 @@ import cv2, numpy as np
 import matplotlib.pyplot as plt
 
 def draw_histogram(img: np.ndarray, enable_grid = False) -> None:
+    """
+    Строит гистограмму по получаемому изображению
+    :param img: получаемое изображение
+    :param enable_grid: включает и выключает сетку на графике"""
     
     plt.figure(figsize=(10, 5))
 
