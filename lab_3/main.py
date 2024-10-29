@@ -1,5 +1,6 @@
 import argparse
 
+from img_actions import image_reader, get_image_shape
 
 def get_arguments() -> tuple:
     """
@@ -18,4 +19,15 @@ def get_arguments() -> tuple:
 
 if __name__ == '__main__':
     image_name, save_path = get_arguments()
+
+    try:
+        img = image_reader(image_name)
+    except:
+        raise Exception("Can't read image")
+    
+    width, height = get_image_shape(img)
+    print("Image size: {}x{}".format(width, height))
+
+    
+
     
