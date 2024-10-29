@@ -51,6 +51,7 @@ coverage.xml
 .pytest_cache/
 cover/
 
+/lab_3/image.jpg
 # Translations
 *.mo
 *.pot
