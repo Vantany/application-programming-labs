@@ -11,12 +11,16 @@ def get_arguments() -> tuple:
 
     try:
         parser = argparse.ArgumentParser()
-        parser.add_argument("-i", type=str)
-        parser.add_argument("-p", type=str)
-        return parser.parse_args().i, parser.parse_args().p
+        parser.add_argument("-i", "--image", type=str, help = "Путь до исходного изображения")
+        parser.add_argument("-p", "--save_path", type=str, help = "Путь для сохранения")
 
-    except:
-        raise Exception("Incorrect argument format")
+        if not parser.parse_args().image or not parser.parse_args().save_path:
+            raise argparse.ArgumentError
+        
+        return parser.parse_args().image, parser.parse_args().save_path
+
+    except argparse.ArgumentError as e:
+        print(e)
 
 if __name__ == '__main__':
     image_name, save_path = get_arguments()
@@ -30,11 +34,11 @@ if __name__ == '__main__':
         draw_histogram(img, enable_grid=True)
 
         inverted_img = image_invert(img)
-        show_images(img, inverted_img, titles = ["Исходное изображение", "Инвертированное изображение"])
+        show_images(img, inverted_img)
 
         save_image(save_path=save_path, img = inverted_img)
 
-    except:
-        raise Exception("Something went wrong")
+    except Exception as e:
+        print(e)
 
     

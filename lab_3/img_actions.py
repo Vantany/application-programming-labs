@@ -8,8 +8,15 @@ def image_reader(image_name: str) -> np.ndarray:
     :return: изображение в представлении в виде 
     двумерного массива
     """
+    try:
+        img = cv2.imread(image_name)
 
-    return cv2.imread(image_name)
+        if img is None:
+            raise Exception('Не удалось прочитать изображение')
+        return img
+
+    except Exception as e:
+        print(*e.args)
 
 
 def get_image_shape(img: np.ndarray) -> tuple:
@@ -28,23 +35,25 @@ def image_invert(img: np.ndarray) -> np.ndarray:
     
     return 255 - img
 
-def show_images(*args, **kwargs) -> None:
+def show_images(img, inverted_img: np.ndarray) -> None:
     """
     Отображает изображение на жкран с помощью
     библиотеки matplotlib
-    в *args находятся изображения
-    в **kwargs заголовки для изображений"""
+    :param img: исходное изображение
+    :param inverted_img: инвертированное изображение
+    """
 
-    titles = kwargs.get('titles', None)
-    num_images = len(args)
+    plt.figure(figsize=(10, 5))
 
-    plt.figure(figsize=(15, 5))
+    plt.subplot(1, 2, 1)
+    plt.title('Исходное изображение')
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.axis('off')
 
-    for i, img in enumerate(args):
-        plt.subplot(1, num_images, i + 1)
-        plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)) 
-        if titles and i < len(titles):
-            plt.title(titles[i]) 
+    plt.subplot(1, 2, 2)
+    plt.title('Инвертированное изображение')
+    plt.imshow(cv2.cvtColor(inverted_img, cv2.COLOR_BGR2RGB)) 
+    plt.axis('off')
 
     plt.show()
 
