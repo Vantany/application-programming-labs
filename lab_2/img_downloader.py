@@ -12,8 +12,8 @@ def img_downloader(keyword: str , save_path: str) -> None:
     :return: None
     """
 
-    if os.path.exists(save_path): # для отладки
-        return
+    # if os.path.exists(save_path): # для отладки
+    #     return
 
     try:
         google_crawler = GoogleImageCrawler(storage={'root_dir': save_path})
