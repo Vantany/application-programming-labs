@@ -14,14 +14,16 @@ def get_arguments() -> tuple:
     parser = argparse.ArgumentParser()
 
     try:
-        parser.add_argument('keyword', required=True, type=str, help = "Ключевок слово для поиска")
+        parser.add_argument('-keyword', required=True, type=str, help = "Ключевок слово для поиска")
         parser.add_argument('-sp', "--save_path", required= True, type=str, help = "Путь к папке для сохранения")
-        parser.add_argument('-ap', "--anotation_path", required=True, type=str, help = "Путь к файлу с аннотацией")
+        parser.add_argument('-ap', "--annotation_path", required=True, type=str, help = "Путь к файлу с аннотацией")
     except Exception as e:
         print('Неверный формат аргументов')
     
-    return parser.parse_args().keyword, parser.parse_args().sp, \
-            parser.parse_args().ap
+    parsered_data = parser.parse_args()
+
+    return parsered_data.keyword, parsered_data.save_path, \
+            parsered_data.annotation_path
 
  
 if __name__ == "__main__":
