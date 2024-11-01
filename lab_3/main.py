@@ -11,16 +11,13 @@ def get_arguments() -> tuple:
 
     try:
         parser = argparse.ArgumentParser()
-        parser.add_argument("-i", "--image", type=str, help = "Путь до исходного изображения")
-        parser.add_argument("-p", "--save_path", type=str, help = "Путь для сохранения")
-
-        if not parser.parse_args().image or not parser.parse_args().save_path:
-            raise argparse.ArgumentError
+        parser.add_argument("-i", "--image", type=str, required=True, help = "Путь до исходного изображения")
+        parser.add_argument("-p", "--save_path", type=str, required=True, help = "Путь для сохранения")
         
         return parser.parse_args().image, parser.parse_args().save_path
 
-    except argparse.ArgumentError as e:
-        print(e)
+    except Exception as e:
+        print(*e.args)
 
 if __name__ == '__main__':
     image_name, save_path = get_arguments()

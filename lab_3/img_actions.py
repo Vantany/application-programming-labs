@@ -63,4 +63,10 @@ def save_image(save_path: str, img: np.ndarray) -> None:
     :param save_dir: Путь по которому сохранится файл
     :param img: Сохраняемое изображение
     """
-    cv2.imwrite(save_path, img)
+    
+    try:   
+        if not cv2.imwrite(save_path, img):
+            raise Exception('Не удалось сохранить изображение')
+        
+    except Exception as e:
+        print(*e.args)
