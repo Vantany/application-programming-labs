@@ -29,12 +29,12 @@ if __name__ == "__main__":
 
     df[["height", "width", "depth"]] = df["abs_path"].apply(lambda path: pd.Series(add_images_info(path)))
     
-    stats = df[['height', 'width', 'depth']].describe()
+    stat = describe_dataframe(df)
     
     filtered_df = filter_images_by_size(df, 1000, 1300)
 
     df = add_area_column(df)
 
-    df = df.sort_values(by='area')
+    df = sort_values(df)
 
     build_histogram(df)
